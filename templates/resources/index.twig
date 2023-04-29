@@ -1,0 +1,208 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+{% set query = craft.app.request.getParam('q') %}
+
+{% set reports = craft.categories.group('resources').slug('reports') %}
+{% set briefings = craft.categories.group('resources').slug('briefings') %}
+{% set evidence = craft.categories.group('resources').slug('tjm-written-evidence') %}
+
+{% set memberresource = craft.categories.group('resources').slug('member-resource') %}
+{% set otherresource = craft.categories.group('resources').slug('other-resource') %}
+
+
+{# .order('sticky desc','postDate desc') #}
+{% set results  = craft.entries({
+limit:null,
+section:'reports,briefings',
+with:['categoryFieldHandle'],
+relatedTo: [
+'or',
+{ targetElement: reports },
+{ targetElement: briefings },
+{ targetElement: evidence }
+],
+localeEnabled: false
+}).orderBy('sticky desc, postDate desc').ids()
+%}
+
+{% set lowresults  = craft.entries({
+limit:null,
+section:'reports,briefings',
+
+with:['categoryFieldHandle'],
+relatedTo: [
+'or',
+{ targetElement: memberresource },
+{ targetElement: otherresource }
+],
+localeEnabled: false
+}).orderBy('sticky desc','postDate desc').ids()
+%}
+
+{% set allEntries = results|merge(lowresults) %}
+
+{% set posts = craft.entries.id( allEntries ).fixedOrder(true) %}
+
+{%  paginate posts.limit(10) as pageInfo, pageEntries %}
+
+{% set sticky = craft.entries({
+limit:null,
+section:'reports,briefings',
+sticky:'1'
+}).limit(1)
+%}
+{#{% set sticky = craft.entries.section('reports,briefings').sticky('1') %}#}
+{% block content %}
+
+<div class="container-xl dark-bg ">
+    <div class="container resources ">
+        <section class="dark-title">
+            <div class="col-xs-5  col-sm-9 col-md-9">
+                <h1 class="inline"><span class="report-category">Resources</span> <span class="title-shrunk">Resources</span></h1>
+
+            </div>
+                <div class="col-xs-11 col-sm-7 col-md-7 res-search-col">
+                    {% include 'resources/_search-form' %}
+                </div>
+        </section>
+    </div>
+</div>
+
+
+<div class="container site page resources-list">
+    <section class="main">
+
+
+        <div class="col-xs-16  col-md-9 col-md-offset-0 ">
+
+            {% if sticky | length %}
+                {% set entry = sticky[0] %}
+                {% set image = entry.resourceImage[0] ?? null %}
+                {% set file = entry.resourcesFile[0] ?? null %}
+                {% set category = entry.category[0] ?? null %}
+                {% set publisher = "" %}
+                {% set publisherUrl = "" %}
+                {% set memberPublisher = entry.createdByMember.one() %}
+
+                {% if image %}
+                    {% set media = image.getUrl('tinyThumb') %}
+                {% else %}
+                    {% set media = 'images/meta/pdf-default.png' %}
+                {% endif %}
+
+                {% include 'resources/_index-item-sticky.twig' %}
+            {% endif %}
+
+            {% for entry in pageEntries %}
+
+
+            {% set image = entry.resourceImage[0] ?? null %}
+            {% set file = entry.resourcesFile[0] ?? null %}
+            {% set category = entry.category[0] ?? null %}
+            {% set publisher = "" %}
+            {% set publisherUrl = "" %}
+            {% set memberPublisher = entry.createdByMember.one() %}
+
+            {% if image %}
+                {% set media = image.getUrl('tinyThumb') %}
+            {% else %}
+                {% set media = 'images/meta/pdf-default.png' %}
+            {% endif %}
+
+                    {#{{ category.slug  }}#}
+                {#{% switch category.slug %}#}
+
+                    {#{% case "briefings" %}#}
+                    {#<p>Cat slug: {{ category.slug  }}</p>#}
+
+                {#{% case "reports" %}#}
+                {#<p>Rep slug: {{ category.slug  }}</p>#}
+
+                {#{% endswitch %}#}
+
+                {% include 'resources/_index-item.twig' %}
+                {#{% if category.slug in ["reports","briefings","tjm-written-evidence"] %}#}
+                    {#{% include 'resources/_index-item.twig' %}#}
+                    {#{% elseif category.slug in ["other-resource","member-resource"] %}#}
+                       {##}
+                {#{% endif %}#}
+            {% endfor %}
+
+
+
+
+
+            <div class=" container">
+                <div class="row ">
+                    <div class="col-xs-16  text-sm-center">
+                        <ul class="pagination mb-5 justify-content-center">
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.firstUrl }}">Start</a>
+                            </li>
+
+                            {% if pageInfo.prevUrl %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ pageInfo.prevUrl }}">Previous</a>
+                                </li>
+                            {% endif %}
+
+
+
+                            {% for page, url in pageInfo.getPrevUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                            <li class="page-item "><a class="page-link">{{ pageInfo.currentPage }}</a></li>
+
+                            {% for page, url in pageInfo.getNextUrls(3) %}
+                            <li class="page-item "><a class="page-link" href="{{ url }}">{{ page }}</a>
+                                {% endfor %}
+
+                                {% if pageInfo.nextUrl %}
+                            <li class="page-item "><a class="page-link" href="{{ pageInfo.nextUrl }}">Next</a></li>
+                            {% endif %}
+
+                            <li class="page-item d-none d-sm-block">
+                                <a class="page-link" href="{{ pageInfo.lastUrl }}">End</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        {# side col cats#}
+        <div class=" col-xs-16  col-md-4 col-md-offset-2 side-co    ">
+
+            <ul>
+                {% nav category in craft.categories.group('resources') %}
+                <li>
+                    <a href="{{ category.url }}">{{ category.title }}</a>
+                    {% ifchildren %}
+                    <ul>
+                        {% children %}
+                    </ul>
+                    {% endifchildren %}
+                </li>
+                {% endnav %}
+            </ul>
+        </div>
+
+    </section>
+</div>
+{% endblock %}
