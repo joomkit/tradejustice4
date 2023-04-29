@@ -24,6 +24,7 @@ tjm.code-workspace
 
 public_html/documents/**
 *.example
+tjm4.code-workspace
 modules/Module.php
 public_html/assets.zip
 public_html/apple-touch-icon.png
