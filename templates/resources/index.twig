@@ -21,8 +21,6 @@
 {% set memberresource = craft.categories.group('resources').slug('member-resource') %}
 {% set otherresource = craft.categories.group('resources').slug('other-resource') %}
 
-
-{# .order('sticky desc','postDate desc') #}
 {% set results  = craft.entries({
 limit:null,
 section:'reports,briefings',
@@ -33,7 +31,6 @@ relatedTo: [
 { targetElement: briefings },
 { targetElement: evidence }
 ],
-localeEnabled: false
 }).orderBy('sticky desc, postDate desc').ids()
 %}
 
@@ -47,7 +44,6 @@ relatedTo: [
 { targetElement: memberresource },
 { targetElement: otherresource }
 ],
-localeEnabled: false
 }).orderBy('sticky desc','postDate desc').ids()
 %}
 
