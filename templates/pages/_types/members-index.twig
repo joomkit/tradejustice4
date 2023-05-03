@@ -18,7 +18,7 @@
 
 
 {% for entry in entries %}
-    {% set category = entry.membershipCategory.first() %}
+    {% set category = entry.membershipCategory.one() %}
 
 
 {% if entry.sticky %}

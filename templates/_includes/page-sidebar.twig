@@ -3,7 +3,7 @@
 
     {# set entries = craft.entries.section('pages').find() #}
 
-    {% set entry = craft.entries.section('pages').slug('about-us').first() %}
+    {% set entry = craft.entries.section('pages').slug('about-us').one() %}
     <div class="pside-inner">
         <aside id="nav" class="sidemenu ">
             <ul class="nav" data-spy="scrollspy">

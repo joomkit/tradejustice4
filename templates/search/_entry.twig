@@ -73,7 +73,7 @@ subRight: true
             <article class="dir-entry">
                 <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
 
-                <p>{{ entry.country.first() }}</p>
+                <p>{{ entry.country.one() }}</p>
                 <p><a href="{{ entry.url }}">Continue reading</a></p>
             </article>
             {% endfor %}

@@ -69,7 +69,7 @@
 
                 <div class="flash">
 
-                    <a href="{{globalContent.newsflashLink.first().url }}">{{globalContent.newsflashIntro }}</a>
+                    <a href="{{globalContent.newsflashLink.one().url }}">{{globalContent.newsflashIntro }}</a>
 
                 </div>
 
@@ -120,7 +120,7 @@
 
     {% for column in block %}
 
-    {% set link = column.blockLink.first() %}
+    {% set link = column.blockLink.one() %}
     <div class="col-xxs-16 col-xs-8 col-sm-8">
         {% for image in column.blockImage %}
         {% set imageTransform = {
@@ -162,8 +162,8 @@
 
                     {% if loop.index is odd %}
                     {% set link = entry.url %}
-                {% set image = entry.resourceImage.first() %}
-                    {% set file = entry.resourcesFile.first() %}
+                {% set image = entry.resourceImage.one() %}
+                    {% set file = entry.resourcesFile.one() %}
 
                 {% if image %}
                 {% set media = image.getUrl('tinyThumb') %}
@@ -197,8 +197,8 @@
 
                 {% if loop.index is even %}
                 {% set link = entry.url %}
-                {% set image = entry.resourceImage.first() %}
-                {% set file = entry.resourcesFile.first() %}
+                {% set image = entry.resourceImage.one() %}
+                {% set file = entry.resourcesFile.one() %}
 
                 {% if image %}
                 {% set media = image.getUrl('tinyThumb') %}

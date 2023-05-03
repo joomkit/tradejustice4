@@ -10,7 +10,7 @@
 .idea/*
 .idea/**
 *.csv
-
+config/**
 public_html/assets/**
 public_html/imager/**
 public_html/img/**

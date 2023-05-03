@@ -12,7 +12,7 @@
 
 {% extends "_layouts/site" %}
 
-{% set tag = craft.tags.title(tag).first() %}
+{% set tag = craft.tags.title(tag).one() %}
 {% if not tag %}
 {% exit 404 %}
 {% endif %}
