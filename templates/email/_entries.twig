@@ -3,9 +3,9 @@
 {% for entry in entry.addContent %}
 
 {% if entry.resourceImage |length %}
-{% set image = entry.resourceImage.first() %}
-{% elseif entry.leadImage.first() %}
-{% set image = entry.leadImage.first() %}
+{% set image = entry.resourceImage.one() %}
+{% elseif entry.leadImage.one() %}
+{% set image = entry.leadImage.one() %}
 {% endif %}
 
 

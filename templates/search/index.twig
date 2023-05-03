@@ -101,8 +101,8 @@
 
                 {% endif %}
 
-                {% if entry.category.first() %}
-                <span class="label label-default">{{ entry.category.first().title }}</span>
+                {% if entry.category.one() %}
+                <span class="label label-default">{{ entry.category.one().title }}</span>
                 {% else %}
                 {% set handle = entry.section.handle | title %}
                 {% set handle = handle | replace("Tradedeals","Trade Deals", handle) %}

@@ -15,7 +15,7 @@
 {% set baseUrl = craft.config.environmentVariables.baseUrl %}
 {% extends "_layouts/site" %}
 
-{% set pdfAsset = entry.resourcesFile.first() %}
+{% set pdfAsset = entry.resourcesFile.one() %}
 
 {% block content %}
 
@@ -67,7 +67,7 @@
         <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2">
 
             <div class="thumbnail">
-                {% set image = entry.resourceImage.first() %}
+                {% set image = entry.resourceImage.one() %}
 
                 {% if image %}
                 <a class="img-thumbnail" href="{{ pdfAsset.url }}" >
@@ -81,7 +81,7 @@
             </div>
             <div class="caption">
                 {% set publisher = "" %}
-                {% set memberPublisher = entry.createdByMember.first() %}
+                {% set memberPublisher = entry.createdByMember.one() %}
 
                 {% if entry.tjmOwnedResource == "yes" %}
 
@@ -91,8 +91,8 @@
 
                     {% if memberPublisher  %}
 
-                        {% set publisher = entry.createdByMember.first() %}
-                        {% set publisherUrl = entry.createdByMember.first().url %}
+                        {% set publisher = entry.createdByMember.one() %}
+                        {% set publisherUrl = entry.createdByMember.one().url %}
 
                     {% endif %}
 

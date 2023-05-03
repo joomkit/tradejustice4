@@ -74,7 +74,7 @@ localeEnabled: false
                     {% set category = entry.category[0] ?? null %}
                     {% set publisher = "" %}
                     {% set publisherUrl = "" %}
-                    {% set memberPublisher = entry.createdByMember.first() %}
+                    {% set memberPublisher = entry.createdByMember.one() %}
 
 
                     {% if image %}

@@ -44,10 +44,10 @@
 {% set showfeatured = "" %}
 
 {% if featured %}
-{% set featuredEntry = entry.entryLink.first() %}
-{% set pdfAsset = featuredEntry.resourcesFile.first() %}
+{% set featuredEntry = entry.entryLink.one() %}
+{% set pdfAsset = featuredEntry.resourcesFile.one() %}
 {% set showfeatured = "showfeatured" %}
-{% set image = featuredEntry.resourceImage.first() %}
+{% set image = featuredEntry.resourceImage.one() %}
 
 
 <div class="container-xl featured">
@@ -84,7 +84,7 @@
 
 
         <div class="col-sm-10 col-md-10 main-col">
-            {% set image = entry.leadImage.first() %}
+            {% set image = entry.leadImage.one() %}
 
             {% if image %}
             <img  id="subtitle" class="img-responsive lead"
@@ -108,7 +108,7 @@
 
 
                 <div class="sectionBody" >
-                    {% set image = block.sectionImage.first() %}
+                    {% set image = block.sectionImage.one() %}
                     {% if image %}
                     <img class="img-responsive {{ block.inDepthSectionImagePosition }}" srcset="{{ image.getUrl('mobile') }} 320w,
                                  {{ image.getUrl('mobile') }} 450w,
@@ -127,7 +127,7 @@
             <div id="{{block.id}}">
                 <h3>{{ block.sectionHeading }}</h3>
 
-                {% set image = block.inDepthSectionImage.first()  %}
+                {% set image = block.inDepthSectionImage.one()  %}
                 <div class="sectionBody" >
                     {% if image %}
                     <img class="img-responsive {{ block.inDepthSectionImagePosition }}" srcset="{{ image.getUrl('mobile') }} 320w,
@@ -177,7 +177,7 @@
                 <h2>Reports and Briefings</h2>
                 {% for report in entry.reportsAndBriefings %}
                 {% set link = report.url %}
-                {% set image = report.resourceImage.first() %}
+                {% set image = report.resourceImage.one() %}
 
                 {% if image %}
                 {% set media = image.getUrl('tinyThumb') %}
@@ -268,7 +268,7 @@
 
                         <h4>Section: {{ section | capitalize }}</h4></div>
 
-                    {% set parent = craft.entries.id(26).first() %}
+                    {% set parent = craft.entries.id(26).one() %}
                     {% if parent %}
 
                     {% set sidemenu = parent.children.status('live').level('2').hidePage('< 1') %}
