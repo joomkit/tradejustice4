@@ -1,9 +1,9 @@
 
-{% set entries = craft.entries.section('members').order('title asc').find() %}
+{% set entries = craft.entries.section('members').orderBy('title asc').all() %}
 
 
 
-{% set entries = craft.entries.section('members').order('title asc').find() %}
+{% set entries = craft.entries.section('members').orderBy('title asc').all() %}
 {% set relatedCats = craft.categories.relatedTo(entries) %}
 
 {#{% for category in relatedCats %}#}
