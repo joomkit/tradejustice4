@@ -15,29 +15,29 @@
 
 {% extends "_layouts/site" %}
 
+{% import "_macros" as macros %}
+{% set q = craft.app.request.getParam('q')  %}
 
-{% set q = craft.request.getParam('q')  %}
-
-{% set query = craft.request.getParam('q') %}
+{% set query = craft.app.request.getParam('q') %}
 {% if q | length %}
     {% set results = craft.entries({
-        limit:null,
+        
         search: {
             query: q,
             subLeft: true,
             subRight: true
         }
-    }).section('and, not homepage')
-%}
+    }).section('not homepage')
+   %}
+    {%  paginate results.limit(10) as pageInfo, pageEntries %}
 {% else %}
-    {% set results = craft.entries({
-        limit:500,
-        order:['title asc']
-    })
-    %}
+    {% set results = 0  %}
+    
 {% endif %}
 
-{%  paginate results.limit(10) as pageInfo, pageEntries %}
+
+
+
 
 {% block content %}
 
@@ -65,7 +65,7 @@
 
 
         <div class="col-sm-10 col-md-10 main-col pages">
-            {% if (results.count()) <= '0' %}
+            {% if (results <= '0') %}
             <h2>No results found for: {% if q %} "{{ q|capitalize }}"
                 {% else %}
 
@@ -82,14 +82,14 @@
 
             <form class="searchpage" role="search" action="{{ siteUrl('/search') }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ craft.request.getParam('q') }}">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ craft.app.request.getParam('q') }}">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
             </form>
 
-
+        {% if q | length %}
             {% for entry in pageEntries %}
             <article class="dir-entry">
                 <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
@@ -101,7 +101,7 @@
 
                 {% endif %}
 
-                {% if entry.category.one() %}
+                {% if entry.category.one() ?? null  %}
                 <span class="label label-default">{{ entry.category.one().title }}</span>
                 {% else %}
                 {% set handle = entry.section.handle | title %}
@@ -149,12 +149,12 @@
                 </ul>
 
             </div>
-
+{% endif %}
         </div>
 
         <div class="hide hidden-xs col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 side-co    ">
 
-            {% set entries = craft.entries.section('pages').find() %}
+            {% set entries = craft.entries.section('pages').all() %}
             <div class="pside-inner">
                 <aside id="nav" class="psidemenu ">
 
