@@ -54,7 +54,8 @@
 
                     {% from _self import errorList %}
                     <form method="post" class="form-contact" action="" accept-charset="UTF-8" style="max-width:400px">
-                        {{ getCsrfInput() }}
+                        {# {{ getCsrfInput() }} #}
+                        {{ csrfInput() }}
                         <input type="hidden" name="action" value="guestEntries/saveEntry">
                         <input type="hidden" name="redirect" value="contact/success">
                         <input type="hidden" name="sectionId" value="3">
