@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "573c39d8061b2d5fbc777493ad2ed4f5",
+    "content-hash": "91921628d1da969c145cc55131264136",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4399,6 +4399,63 @@
             "time": "2016-11-22T22:57:47+00:00"
         },
         {
+            "name": "superbig/craft3-templateselect",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sjelfull/craft3-templateselect.git",
+                "reference": "406c32dbcd225be3daa053658606817a42298b39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sjelfull/craft3-templateselect/zipball/406c32dbcd225be3daa053658606817a42298b39",
+                "reference": "406c32dbcd225be3daa053658606817a42298b39",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^4.0.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Template Select",
+                "handle": "template-select",
+                "schemaVersion": "4.0.0",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "changelogUrl": "https://raw.githubusercontent.com/sjelfull/craft3-templateselect/master/CHANGELOG.md",
+                "class": "superbig\\templateselect\\TemplateSelect"
+            },
+            "autoload": {
+                "psr-4": {
+                    "superbig\\templateselect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Superbig",
+                    "homepage": "https://superbig.co"
+                }
+            ],
+            "description": "A fieldtype that allows you to select a template from a dropdown.",
+            "keywords": [
+                "Craft",
+                "cms",
+                "craft-plugin",
+                "craftcms",
+                "template select"
+            ],
+            "support": {
+                "docs": "https://github.com/sjelfull/craft3-templateselect/blob/master/README.md",
+                "issues": "https://github.com/sjelfull/craft3-templateselect/issues",
+                "source": "https://github.com/sjelfull/craft3-templateselect/tree/3.0.0"
+            },
+            "time": "2022-10-03T21:19:00+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v5.4.22",
             "dist": {
@@ -6981,5 +7038,5 @@
     "platform-overrides": {
         "php": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
