@@ -1,13 +1,6 @@
 {#
- # News index template
+ # catergory index template
  # -------------------
- #
- # This template is loaded whenever http://example.com/news is
- # requested, because it is located at news/index.html in your
- # craft/templates/ folder.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
  #}
 
 {% extends "_layouts/site" %}
@@ -27,14 +20,16 @@
 {#%}#}
 
 
+{% set categorySlug = craft.app.request.segment(2) %}
+{% set publications = craft.categories.group('resources').slug(categorySlug) %}
+{% import "_macros" as macros %}
 {% set results  = craft.entries({
 limit:null,
 section:'reports,briefings',
-order:['title asc'],
+orderBy:['title asc'],
 with:['categoryFieldHandle'],
 relatedTo: category,
-localeEnabled: false
-}).order('sticky desc','postDate desc')
+}).orderBy('sticky desc, postDate desc')
 %}
 
 {%  paginate results.limit(10) as pageInfo, pageEntries %}
