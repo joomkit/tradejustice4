@@ -12,6 +12,7 @@
 
 {% extends "_layouts/site" %}
 
+{% import "_macros" as macros %}
 
 {% set ids = [] %}
 
@@ -23,19 +24,19 @@ with:[
 'resourceImage',
 'resourcesFile'
 ]
-}).tjmOwnedResource('yes').id(ids).order('sticky desc','postDate desc')
+}).tjmOwnedResource('yes').id(ids).orderBy('sticky desc, postDate desc')
 %}
 
-{% set query = craft.request.getParam('q') %}
+{% set query = craft.app.request.getParam('q') %}
+
 
 
 {% set results  = craft.entries({
 limit:null,
 section:'reports,briefings',
-order:['title asc'],
-with:['categoryFieldHandle'],
-localeEnabled: false
-}).search(query).order('score')
+orderBy:['title asc'],
+with:['categoryFieldHandle']
+}).search(query).orderBy('score')
 %}
 
 {%  paginate results.limit(10) as pageInfo, pageEntries %}
