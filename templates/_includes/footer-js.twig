@@ -1,5 +1,5 @@
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="{{ baseUrl }}/js/bootstrap.min.js"></script>
 
 {% if craft.app.request.isLivePreview  %}
@@ -36,54 +36,6 @@
 !function(a,b,c){var d=a();a.fn.dropdownHover=function(c){return"ontouchstart"in document?this:(d=d.add(this.parent()),this.each(function(){function n(a){e.parents(".navbar").find(".navbar-toggle").is(":visible")||(b.clearTimeout(l),b.clearTimeout(m),m=b.setTimeout(function(){d.find(":focus").blur(),k.instantlyCloseOthers===!0&&d.removeClass("open"),b.clearTimeout(m),e.attr("aria-expanded","true"),f.addClass("open"),e.trigger(i)},k.hoverDelay))}var l,m,e=a(this),f=e.parent(),g={delay:500,hoverDelay:0,instantlyCloseOthers:!0},h={delay:a(this).data("delay"),hoverDelay:a(this).data("hover-delay"),instantlyCloseOthers:a(this).data("close-others")},i="show.bs.dropdown",j="hide.bs.dropdown",k=a.extend(!0,{},g,c,h);f.hover(function(b){return!f.hasClass("open")&&!a.contains(e[0],a(b.target)[0])||void n(b)},function(){b.clearTimeout(m),l=b.setTimeout(function(){e.attr("aria-expanded","false"),f.removeClass("open"),e.trigger(j)},k.delay)}),e.hover(function(b){return!f.hasClass("open")&&!a.contains(f[0],a(b.target)[0])||void n(b)}),f.find(".dropdown-submenu").each(function(){var d,c=a(this);c.hover(function(){b.clearTimeout(d),c.children(".dropdown-menu").show(),c.siblings().children(".dropdown-menu").hide()},function(){var a=c.children(".dropdown-menu");d=b.setTimeout(function(){a.hide()},k.delay)})})}))}}(jQuery,window);
 
 $(document).ready(function(){$('[data-hover="dropdown"]').dropdownHover()}),$(function(){$('[data-toggle="tooltip"]').tooltip()}),$(document).on("click"," .dropdown-menu",function(a){a.stopPropagation()}),$(".collapse").on("show.bs.collapse hide.bs.collapse",function(a){a.preventDefault()}),$('[data-toggle="collapse"]').on("click",function(a){a.preventDefault()}),$(".btn-main-menu").click(function(){console.log("toogle"),$(".collapse").toggle("slow",function(){$(".btn-main-menu").toggleClass("open")})}),$("a.dropdown-toggle").click(function(){console.log("subdrop")}),$(".submail").on("click",function(a){$(this).val("").fadeOut}),$("#monkey").on("submit",function(a){a.preventDefault(),$.post("{{ siteUrl}}mailchimpSubscribe/list/Subscribe",$("#monkey").serialize()).done(function(a){a.success?($("#subResult").text(a.message+": {{globalContent.subscribeSuccess}}"),$("#msg").modal()):($("#subResult").text(a.message+": {{globalContent.subscribeIssue}}"),$("#msg").modal())})});
-//
-//
-//    $(document).ready(function () {
-//        // apply dropdownHover to all elements with the data-hover="dropdown" attribute
-//        $('[data-hover="dropdown"]').dropdownHover();
-//    });
-//
-//
-//    //tooltips
-//    $(function () {
-//        $('[data-toggle="tooltip"]').tooltip()
-//    })
-//
-//    // stop dropdown closing
-//    $(document).on('click', ' .dropdown-menu', function (e) {
-//        e.stopPropagation();
-//    });
-//
-//        //collapse disable
-//        $('.collapse').on('show.bs.collapse hide.bs.collapse', function(e) {
-//            e.preventDefault();
-//        });
-//        $('[data-toggle="collapse"]').on('click', function(e) {
-//            e.preventDefault();
-//            //$($(this).data('target')).toggleClass('in');
-//            //$(".collapse").collapse('toggle');
-//        });
-//
-//
-//    $(".btn-main-menu").click(function(){
-//        console.log ('toogle');
-//       // $(".collapse").collapse('toggle').fast();
-//
-//        $( ".collapse" ).toggle( "slow", function() {
-//            // Animation complete.
-//            $('.btn-main-menu').toggleClass('open');
-//        });
-//    });
-//
-//    $("a.dropdown-toggle").click(function(){
-//        console.log ('subdrop');
-//        // $(".collapse").collapse('toggle').fast();
-//
-////        $( ".dropdown-menu " ).toggle( "slow", function() {
-////            // Animation complete.
-////            $this.parent().toggleClass('open');
-////        });
-//    });
 
 $('.submail').on('click', function(e) {
     $(this).val('').fadeOut;
