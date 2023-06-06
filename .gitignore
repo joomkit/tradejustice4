@@ -28,3 +28,4 @@ tjm4.code-workspace
 modules/Module.php
 public_html/assets.zip
 public_html/apple-touch-icon.png
+*.sh
