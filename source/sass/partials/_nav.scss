@@ -226,7 +226,9 @@ li.shrink{
 
   max-height: 100%;
   @include breakpoint(sm) {
-    margin-top: 73px;
+    // margin-top: 73px;
+    
+    margin-top: 80px;
   }
 }
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{

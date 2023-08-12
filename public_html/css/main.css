@@ -6827,7 +6827,7 @@ li.shrink {
   max-height: 100%; }
   @media (min-width: 768px) {
     .navbar-default .navbar-collapse {
-      margin-top: 73px; } }
+      margin-top: 80px; } }
 @media (min-width: 768px) {
   .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     background: transparent; } }
