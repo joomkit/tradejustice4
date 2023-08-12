@@ -201,7 +201,8 @@ li.shrink{
 
 
 .navbar.navbar-default.shrink  .navbar-collapse{
-  margin-top:33px;
+  // margin-top:33px;
+  margin-top:40px;
 }
 // end shrink
 
@@ -227,7 +228,7 @@ li.shrink{
   max-height: 100%;
   @include breakpoint(sm) {
     // margin-top: 73px;
-    
+
     margin-top: 80px;
   }
 }
